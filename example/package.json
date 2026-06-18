@@ -7,22 +7,23 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
+    "prebuild": "expo prebuild",
     "build:ios": "xcodebuild ONLY_ACTIVE_ARCH=YES -workspace ios/SilkTextExample.xcworkspace -UseNewBuildSystem=YES -scheme SilkTextExample -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build -quiet",
     "build:android": "cd android && ./gradlew assembleDebug -DtestBuildType=debug -Dorg.gradle.jvmargs=-Xmx4g",
     "build:web": "expo export --platform web"
   },
   "dependencies": {
-    "@expo/metro-runtime": "~55.0.11",
-    "expo": "~55.0.26",
-    "expo-status-bar": "~55.0.6",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "react-native": "0.83.6",
+    "@expo/metro-runtime": "~56.0.15",
+    "expo": "~56.0.12",
+    "expo-status-bar": "~56.0.4",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.85.3",
     "react-native-web": "~0.21.0"
   },
   "private": true,
   "devDependencies": {
-    "expo-dev-client": "~55.0.35",
+    "expo-dev-client": "~56.0.20",
     "react-native-builder-bob": "^0.43.0",
     "react-native-monorepo-config": "^0.4.0"
   }
