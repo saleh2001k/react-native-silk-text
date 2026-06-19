@@ -1,5 +1,7 @@
 # react-native-silk-text
 
+![Demo — Android & iOS side by side](./assets/demo.gif)
+
 **Silky, fully-native per-letter text animation for React Native.**
 
 `<AnimatedText>` is a drop-in replacement for RN `<Text>` whose glyphs re-animate
