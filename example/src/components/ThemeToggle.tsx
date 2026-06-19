@@ -11,9 +11,15 @@ export function ThemeToggle() {
       onPress={toggleMode}
       style={[styles.btn, { backgroundColor: colors.accentSoft }]}
       accessibilityRole="button"
-      accessibilityLabel={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      accessibilityLabel={
+        isDark ? 'Switch to light mode' : 'Switch to dark mode'
+      }
     >
-      <Ionicons name={isDark ? 'sunny' : 'moon'} size={18} color={colors.accent} />
+      <Ionicons
+        name={isDark ? 'sunny' : 'moon'}
+        size={18}
+        color={colors.accent}
+      />
     </Pressable>
   );
 }

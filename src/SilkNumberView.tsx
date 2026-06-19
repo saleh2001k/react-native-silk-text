@@ -47,7 +47,10 @@ export function SilkNumberView(props: NativeProps) {
   };
 
   return (
-    <Text {...(rest as object)} style={[style as StyleProp<TextStyle>, textStyle]}>
+    <Text
+      {...(rest as object)}
+      style={[style as StyleProp<TextStyle>, textStyle]}
+    >
       {`${prefix ?? ''}${formatted}${suffix ?? ''}`}
     </Text>
   );

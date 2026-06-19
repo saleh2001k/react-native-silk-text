@@ -14,7 +14,10 @@ export function AppTabs() {
         disableTransparentOnScrollEdge
         labelStyle={{ color: colors.textFaint }}
       >
-        <NativeTabs.Trigger name="index" contentStyle={{ backgroundColor: colors.bg }}>
+        <NativeTabs.Trigger
+          name="index"
+          contentStyle={{ backgroundColor: colors.bg }}
+        >
           <NativeTabs.Trigger.Label>Brand</NativeTabs.Trigger.Label>
           <NativeTabs.Trigger.Icon
             sf={{ default: 'sparkles', selected: 'sparkles' }}
@@ -22,7 +25,10 @@ export function AppTabs() {
           />
         </NativeTabs.Trigger>
 
-        <NativeTabs.Trigger name="feed" contentStyle={{ backgroundColor: colors.bg }}>
+        <NativeTabs.Trigger
+          name="feed"
+          contentStyle={{ backgroundColor: colors.bg }}
+        >
           <NativeTabs.Trigger.Label>Feed</NativeTabs.Trigger.Label>
           <NativeTabs.Trigger.Icon
             sf={{ default: 'newspaper', selected: 'newspaper.fill' }}
@@ -30,7 +36,10 @@ export function AppTabs() {
           />
         </NativeTabs.Trigger>
 
-        <NativeTabs.Trigger name="learn" contentStyle={{ backgroundColor: colors.bg }}>
+        <NativeTabs.Trigger
+          name="learn"
+          contentStyle={{ backgroundColor: colors.bg }}
+        >
           <NativeTabs.Trigger.Label>Learn</NativeTabs.Trigger.Label>
           <NativeTabs.Trigger.Icon
             sf={{ default: 'book', selected: 'book.fill' }}
@@ -38,7 +47,10 @@ export function AppTabs() {
           />
         </NativeTabs.Trigger>
 
-        <NativeTabs.Trigger name="stats" contentStyle={{ backgroundColor: colors.bg }}>
+        <NativeTabs.Trigger
+          name="stats"
+          contentStyle={{ backgroundColor: colors.bg }}
+        >
           <NativeTabs.Trigger.Label>Stats</NativeTabs.Trigger.Label>
           <NativeTabs.Trigger.Icon
             sf={{ default: 'chart.bar', selected: 'chart.bar.fill' }}
@@ -46,7 +58,10 @@ export function AppTabs() {
           />
         </NativeTabs.Trigger>
 
-        <NativeTabs.Trigger name="shop" contentStyle={{ backgroundColor: colors.bg }}>
+        <NativeTabs.Trigger
+          name="shop"
+          contentStyle={{ backgroundColor: colors.bg }}
+        >
           <NativeTabs.Trigger.Label>Shop</NativeTabs.Trigger.Label>
           <NativeTabs.Trigger.Icon
             sf={{ default: 'cart', selected: 'cart.fill' }}

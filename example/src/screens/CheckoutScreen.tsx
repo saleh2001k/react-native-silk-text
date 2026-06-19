@@ -37,36 +37,72 @@ export function CheckoutScreen() {
         {items.map((it, idx) => (
           <Row
             key={it.id}
-            style={[styles.item, idx < items.length - 1 ? styles.itemBorder : null]}
+            style={[
+              styles.item,
+              idx < items.length - 1 ? styles.itemBorder : null,
+            ]}
           >
             <View style={{ flex: 1 }}>
               <Text style={styles.itemName}>{it.name}</Text>
               <Text style={styles.itemPrice}>${it.price.toFixed(2)}</Text>
             </View>
             <Row style={{ gap: spacing(1.5) }}>
-              <Stepper label="-" onPress={() => setQty(it.id, -1)} colors={colors} />
+              <Stepper
+                label="-"
+                onPress={() => setQty(it.id, -1)}
+                colors={colors}
+              />
               <Text style={styles.qty}>{it.qty}</Text>
-              <Stepper label="+" onPress={() => setQty(it.id, 1)} colors={colors} />
+              <Stepper
+                label="+"
+                onPress={() => setQty(it.id, 1)}
+                colors={colors}
+              />
             </Row>
           </Row>
         ))}
       </Card>
 
       <Card glow={colors.pink}>
-        <Row style={{ justifyContent: 'space-between', marginBottom: spacing(1) }}>
+        <Row
+          style={{ justifyContent: 'space-between', marginBottom: spacing(1) }}
+        >
           <Label>Items</Label>
-          <AnimatedNumber style={styles.small} value={count} variant="odometer" duration={500} />
+          <AnimatedNumber
+            style={styles.small}
+            value={count}
+            variant="odometer"
+            duration={500}
+          />
         </Row>
-        <Row style={{ justifyContent: 'space-between', marginBottom: spacing(1) }}>
+        <Row
+          style={{ justifyContent: 'space-between', marginBottom: spacing(1) }}
+        >
           <Text style={styles.muted}>Subtotal</Text>
-          <AnimatedNumber style={styles.small} value={subtotal} prefix="$" decimals={2} separator="," duration={600} />
+          <AnimatedNumber
+            style={styles.small}
+            value={subtotal}
+            prefix="$"
+            decimals={2}
+            separator=","
+            duration={600}
+          />
         </Row>
-        <Row style={{ justifyContent: 'space-between', marginBottom: spacing(1.5) }}>
+        <Row
+          style={{
+            justifyContent: 'space-between',
+            marginBottom: spacing(1.5),
+          }}
+        >
           <Text style={styles.muted}>Shipping</Text>
-          <Text style={styles.small}>${subtotal > 0 ? SHIPPING.toFixed(2) : '0.00'}</Text>
+          <Text style={styles.small}>
+            ${subtotal > 0 ? SHIPPING.toFixed(2) : '0.00'}
+          </Text>
         </Row>
         <View style={styles.divider} />
-        <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
+        <Row
+          style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}
+        >
           <Text style={styles.totalLabel}>Total</Text>
           <AnimatedNumber
             style={[styles.small, styles.total, { color: colors.pink }]}
@@ -79,8 +115,16 @@ export function CheckoutScreen() {
         </Row>
       </Card>
 
-      <Pressable style={[styles.cta, { backgroundColor: colors.pink }, count === 0 && { opacity: 0.4 }]}>
-        <Text style={[styles.ctaText, { color: colors.onAccent }]}>Place order</Text>
+      <Pressable
+        style={[
+          styles.cta,
+          { backgroundColor: colors.pink },
+          count === 0 && { opacity: 0.4 },
+        ]}
+      >
+        <Text style={[styles.ctaText, { color: colors.onAccent }]}>
+          Place order
+        </Text>
       </Pressable>
     </Screen>
   );
@@ -100,7 +144,9 @@ function Stepper({
       style={[stepperStyles.btn, { backgroundColor: colors.accentSoft }]}
       onPress={onPress}
     >
-      <Text style={[stepperStyles.text, { color: colors.accent }]}>{label}</Text>
+      <Text style={[stepperStyles.text, { color: colors.accent }]}>
+        {label}
+      </Text>
     </Pressable>
   );
 }
@@ -119,13 +165,34 @@ const stepperStyles = StyleSheet.create({
 function createStyles(colors: ThemeColors) {
   return StyleSheet.create({
     item: { paddingVertical: spacing(1.5) },
-    itemBorder: { borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: colors.cardBorder },
+    itemBorder: {
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: colors.cardBorder,
+    },
     itemName: { color: colors.text, fontSize: 15, fontWeight: '600' },
     itemPrice: { color: colors.textMuted, fontSize: 13, marginTop: 2 },
-    qty: { color: colors.text, fontSize: 16, fontWeight: '800', minWidth: 20, textAlign: 'center' },
+    qty: {
+      color: colors.text,
+      fontSize: 16,
+      fontWeight: '800',
+      minWidth: 20,
+      textAlign: 'center',
+    },
     muted: { color: colors.textMuted, fontSize: 15 },
-    small: { fontFamily: fonts.mono, color: colors.text, fontSize: 16, fontWeight: '700', height: 22, width: 120, textAlign: 'right' },
-    divider: { height: StyleSheet.hairlineWidth, backgroundColor: colors.cardBorder, marginBottom: spacing(1.5) },
+    small: {
+      fontFamily: fonts.mono,
+      color: colors.text,
+      fontSize: 16,
+      fontWeight: '700',
+      height: 22,
+      width: 120,
+      textAlign: 'right',
+    },
+    divider: {
+      height: StyleSheet.hairlineWidth,
+      backgroundColor: colors.cardBorder,
+      marginBottom: spacing(1.5),
+    },
     totalLabel: { color: colors.text, fontSize: 16, fontWeight: '800' },
     total: { fontSize: 36, height: 44, width: 160 },
     cta: {

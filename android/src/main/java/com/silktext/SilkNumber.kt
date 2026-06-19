@@ -26,11 +26,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
+import kotlin.math.abs
 
 /**
  * Native animated counter. `roll` eases the value smoothly; `odometer` slides
@@ -87,24 +89,21 @@ private fun SilkOdometer(model: SilkNumberViewModel) {
   val stiffness = springStiffness(model.duration)
 
   var displayed by remember { mutableStateOf(if (model.animateOnMount) model.from else model.value) }
-  var previous by remember { mutableStateOf(displayed) }
 
   LaunchedEffect(model.value) {
     if (model.delayMs > 0f && displayed == model.from) delay(model.delayMs.toLong())
-    previous = displayed
     displayed = model.value
     delay(model.duration.toLong().coerceAtLeast(0))
     model.onEnd?.invoke(model.value)
   }
 
-  val goingUp = displayed >= previous
   val formatted = model.prefix + formatNumber(displayed, model.decimals, model.separator) + model.suffix
 
   Box(modifier = Modifier.fillMaxSize(), contentAlignment = numberAlignment(model)) {
     Row(verticalAlignment = Alignment.CenterVertically) {
       formatted.forEach { ch ->
         if (ch.isDigit()) {
-          RollingDigit(ch, goingUp, style, digitW, digitH, metrics.second, stiffness)
+          RollingDigit(ch, style, digitW, digitH, metrics.second, stiffness)
         } else {
           Text(ch.toString(), style = style, maxLines = 1, softWrap = false)
         }
@@ -113,59 +112,73 @@ private fun SilkOdometer(model: SilkNumberViewModel) {
   }
 }
 
+/**
+ * A single digit slot in the odometer wheel.
+ *
+ * Instead of a 0→1 fraction that must be snapped and restarted on each value
+ * change, we animate a continuous *scroll position* in digit-space (0.0..9.0).
+ * Compose's [Animatable] preserves the current velocity when [animateTo] is
+ * called mid-animation, so a new target during a rapid update continues
+ * smoothly from wherever the spring is at that moment — no snap, no restart.
+ *
+ * Rendering: digit `d` is translated by `(d - scrollPos) * h` pixels.
+ *   • scrollPos == d  → digit d is centered (translationY = 0)
+ *   • scrollPos > d   → digit d is above center (being scrolled away upward)
+ *   • scrollPos < d   → digit d is below center (not yet arrived)
+ * Increasing scrollPos scrolls the column upward; decreasing scrolls downward.
+ */
 @Composable
 private fun RollingDigit(
   target: Char,
-  goingUp: Boolean,
   style: TextStyle,
-  widthDp: androidx.compose.ui.unit.Dp,
-  heightDp: androidx.compose.ui.unit.Dp,
+  widthDp: Dp,
+  heightDp: Dp,
   heightPx: Int,
   stiffness: Float
 ) {
-  var current by remember { mutableStateOf(target) }
-  var previous by remember { mutableStateOf(target) }
-  val anim = remember { Animatable(1f) }
+  val targetInt = target.digitToInt()
+  val scrollPos = remember { Animatable(targetInt.toFloat()) }
 
   LaunchedEffect(target) {
-    if (target != current) {
-      previous = current
-      current = target
-      anim.snapTo(0f)
-      anim.animateTo(1f, spring(dampingRatio = 0.9f, stiffness = stiffness))
-    }
+    scrollPos.animateTo(
+      targetValue = targetInt.toFloat(),
+      animationSpec = spring(
+        dampingRatio = 0.9f,
+        stiffness = stiffness,
+        visibilityThreshold = 0.01f
+      )
+    )
   }
 
-  val p = anim.value
-  val inc = if (goingUp) -1f else 1f // incoming enters from top when increasing
+  val pos = scrollPos.value
   val h = heightPx.toFloat()
+  // Two adjacent digit slots currently visible in the column window.
+  // Clamp lo to 0..8 so hi = lo+1 always stays in 1..9.
+  val lo = pos.toInt().coerceIn(0, 8)
+  val hi = lo + 1
 
   Box(
-    modifier = Modifier.size(widthDp, heightDp).clipToBounds(),
+    modifier = Modifier
+      .size(widthDp, heightDp)
+      .clipToBounds(),
     contentAlignment = Alignment.Center
   ) {
-    if (p < 0.999f) {
-      Text(
-        text = previous.toString(),
-        style = style,
-        maxLines = 1,
-        softWrap = false,
-        modifier = Modifier.graphicsLayer {
-          translationY = -inc * h * p
-          alpha = (1f - p).coerceIn(0f, 1f)
-        }
-      )
-    }
-    Text(
-      text = current.toString(),
-      style = style,
-      maxLines = 1,
-      softWrap = false,
-      modifier = Modifier.graphicsLayer {
-        translationY = inc * h * (1f - p)
-        alpha = p.coerceIn(0f, 1f)
+    listOf(lo, hi).forEach { d ->
+      val dy = (d.toFloat() - pos) * h
+      val alpha = (1f - abs(d.toFloat() - pos)).coerceIn(0f, 1f)
+      if (alpha > 0.01f) {
+        Text(
+          text = d.toString(),
+          style = style,
+          maxLines = 1,
+          softWrap = false,
+          modifier = Modifier.graphicsLayer {
+            translationY = dy
+            this.alpha = alpha
+          }
+        )
       }
-    )
+    }
   }
 }
 

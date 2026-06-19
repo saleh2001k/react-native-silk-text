@@ -23,31 +23,56 @@ export function PricingScreen() {
   return (
     <Screen kicker="Pricing" title="Simple, fair" accent={colors.amber}>
       <Row style={{ gap: spacing(1), marginBottom: spacing(2.5) }}>
-        <Pill label="Monthly" active={!yearly} onPress={() => setYearly(false)} accent={colors.amber} />
-        <Pill label="Yearly" active={yearly} onPress={() => setYearly(true)} accent={colors.amber} />
+        <Pill
+          label="Monthly"
+          active={!yearly}
+          onPress={() => setYearly(false)}
+          accent={colors.amber}
+        />
+        <Pill
+          label="Yearly"
+          active={yearly}
+          onPress={() => setYearly(true)}
+          accent={colors.amber}
+        />
         {yearly ? (
           <View style={styles.save}>
-            <Text style={[styles.saveText, { color: colors.amber }]}>Save 17%</Text>
+            <Text style={[styles.saveText, { color: colors.amber }]}>
+              Save 17%
+            </Text>
           </View>
         ) : null}
       </Row>
 
       <Card glow={colors.amber} style={{ paddingVertical: spacing(3) }}>
         <Label>Plan</Label>
-        <AnimatedText style={styles.plan} animation={{ duration: 600, stagger: 0.05 }}>
+        <AnimatedText
+          style={styles.plan}
+          animation={{ duration: 600, stagger: 0.05 }}
+        >
           Pro
         </AnimatedText>
 
         <Row style={{ alignItems: 'flex-end', marginTop: spacing(1) }}>
           <Text style={styles.currency}>$</Text>
-          <AnimatedNumber style={styles.price} value={price} variant="odometer" duration={700} />
+          <AnimatedNumber
+            style={styles.price}
+            value={price}
+            variant="odometer"
+            duration={700}
+          />
           <Text style={styles.per}>/{yearly ? 'yr' : 'mo'}</Text>
         </Row>
 
         <View style={{ height: spacing(2) }} />
         {FEATURES.map((f) => (
           <Row key={f} style={{ marginBottom: spacing(1) }}>
-            <Ionicons name="checkmark" size={15} color={colors.amber} style={styles.check} />
+            <Ionicons
+              name="checkmark"
+              size={15}
+              color={colors.amber}
+              style={styles.check}
+            />
             <Text style={styles.feature}>{f}</Text>
           </Row>
         ))}
@@ -64,13 +89,44 @@ export function PricingScreen() {
 
 function createStyles(colors: ThemeColors) {
   return StyleSheet.create({
-    plan: { fontFamily: fonts.system, color: colors.text, fontSize: 40, fontWeight: '800', height: 50, width: '100%' },
-    currency: { color: colors.text, fontSize: 30, fontWeight: '800', marginBottom: 8, marginRight: 2 },
-    price: { fontFamily: fonts.mono, color: colors.text, fontSize: 64, fontWeight: '800', height: 70, width: 160 },
-    per: { color: colors.textMuted, fontSize: 18, fontWeight: '700', marginBottom: 12, marginLeft: 4 },
+    plan: {
+      fontFamily: fonts.system,
+      color: colors.text,
+      fontSize: 40,
+      fontWeight: '800',
+      height: 50,
+      width: '100%',
+    },
+    currency: {
+      color: colors.text,
+      fontSize: 30,
+      fontWeight: '800',
+      marginBottom: 8,
+      marginRight: 2,
+    },
+    price: {
+      fontFamily: fonts.mono,
+      color: colors.text,
+      fontSize: 64,
+      fontWeight: '800',
+      height: 70,
+      width: 160,
+    },
+    per: {
+      color: colors.textMuted,
+      fontSize: 18,
+      fontWeight: '700',
+      marginBottom: 12,
+      marginLeft: 4,
+    },
     check: { width: 22 },
     feature: { color: colors.text, fontSize: 15 },
-    save: { backgroundColor: colors.accentSoft, borderRadius: radius.pill, paddingHorizontal: spacing(1.5), paddingVertical: spacing(0.75) },
+    save: {
+      backgroundColor: colors.accentSoft,
+      borderRadius: radius.pill,
+      paddingHorizontal: spacing(1.5),
+      paddingVertical: spacing(0.75),
+    },
     saveText: { fontSize: 12, fontWeight: '800' },
     cta: {
       marginTop: spacing(2.5),

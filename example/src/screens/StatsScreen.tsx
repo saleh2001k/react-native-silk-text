@@ -27,9 +27,26 @@ export function StatsScreen() {
 
   return (
     <Screen kicker="Live dashboard" title="Today" accent={colors.green}>
-      <Stat label="Revenue" value={data.revenue} prefix="$" separator="," color={colors.green} />
-      <Stat label="Active users" value={data.users} separator="," color={colors.accent} />
-      <Stat label="Conversion" value={data.conv} suffix="%" decimals={1} color={colors.pink} />
+      <Stat
+        label="Revenue"
+        value={data.revenue}
+        prefix="$"
+        separator=","
+        color={colors.green}
+      />
+      <Stat
+        label="Active users"
+        value={data.users}
+        separator=","
+        color={colors.accent}
+      />
+      <Stat
+        label="Conversion"
+        value={data.conv}
+        suffix="%"
+        decimals={1}
+        color={colors.pink}
+      />
 
       <Pressable style={styles.refresh} onPress={() => setSeed((s) => s + 1)}>
         <View style={styles.refreshRow}>
@@ -66,7 +83,14 @@ function Stat({
       <Label>{label}</Label>
       <View style={{ height: spacing(0.5) }} />
       <AnimatedNumber
-        style={{ fontFamily: fonts.mono, fontSize: 44, fontWeight: '800', height: 54, width: '100%', color }}
+        style={{
+          fontFamily: fonts.mono,
+          fontSize: 44,
+          fontWeight: '800',
+          height: 54,
+          width: '100%',
+          color,
+        }}
         value={value}
         variant="odometer"
         from={0}
@@ -91,6 +115,11 @@ function createStyles(colors: ThemeColors) {
     },
     refreshRow: { flexDirection: 'row', alignItems: 'center', gap: spacing(1) },
     refreshText: { color: colors.accent, fontSize: 15, fontWeight: '800' },
-    note: { color: colors.textFaint, fontSize: 12, marginTop: spacing(2), textAlign: 'center' },
+    note: {
+      color: colors.textFaint,
+      fontSize: 12,
+      marginTop: spacing(2),
+      textAlign: 'center',
+    },
   });
 }

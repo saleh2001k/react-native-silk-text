@@ -40,6 +40,7 @@
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "test": "jest",
+    "lint:fix": "eslint \"**/*.{js,ts,tsx}\" --fix",
     "release": "release-it --only-version"
   },
   "keywords": [

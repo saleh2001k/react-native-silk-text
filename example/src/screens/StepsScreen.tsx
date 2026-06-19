@@ -7,10 +7,22 @@ import { useAppTheme } from '../hooks/use-app-theme';
 import { fonts, radius, spacing, type ThemeColors } from '../theme';
 
 const STEPS = [
-  { title: 'Install', body: 'Add the package and turn on the New Architecture.' },
-  { title: 'Wrap your text', body: 'Swap Text for AnimatedText and keep every prop.' },
-  { title: 'Add counters', body: 'Roll or odometer numbers, formatted out of the box.' },
-  { title: 'Ship it', body: 'Native motion on iOS and Android. No Reanimated.' },
+  {
+    title: 'Install',
+    body: 'Add the package and turn on the New Architecture.',
+  },
+  {
+    title: 'Wrap your text',
+    body: 'Swap Text for AnimatedText and keep every prop.',
+  },
+  {
+    title: 'Add counters',
+    body: 'Roll or odometer numbers, formatted out of the box.',
+  },
+  {
+    title: 'Ship it',
+    body: 'Native motion on iOS and Android. No Reanimated.',
+  },
 ];
 
 export function StepsScreen() {
@@ -21,7 +33,11 @@ export function StepsScreen() {
   const last = i === STEPS.length - 1;
 
   return (
-    <Screen kicker={`Step ${i + 1} of ${STEPS.length}`} title="Get started" accent={colors.green}>
+    <Screen
+      kicker={`Step ${i + 1} of ${STEPS.length}`}
+      title="Get started"
+      accent={colors.green}
+    >
       <View style={styles.dots}>
         {STEPS.map((_, idx) => (
           <View
@@ -37,9 +53,15 @@ export function StepsScreen() {
         ))}
       </View>
 
-      <Card glow={colors.green} style={{ minHeight: 220, paddingVertical: spacing(3) }}>
+      <Card
+        glow={colors.green}
+        style={{ minHeight: 220, paddingVertical: spacing(3) }}
+      >
         <Text style={[styles.num, { color: colors.green }]}>{`0${i + 1}`}</Text>
-        <AnimatedText style={styles.title} animation={{ duration: 550, stagger: 0.05 }}>
+        <AnimatedText
+          style={styles.title}
+          animation={{ duration: 550, stagger: 0.05 }}
+        >
           {step.title}
         </AnimatedText>
         <AnimatedText
@@ -80,9 +102,29 @@ function createStyles(colors: ThemeColors) {
   return StyleSheet.create({
     dots: { flexDirection: 'row', gap: 6, marginBottom: spacing(2.5) },
     dot: { height: 8, borderRadius: 4 },
-    num: { fontFamily: fonts.mono, fontSize: 16, fontWeight: '800', marginBottom: spacing(1) },
-    title: { fontFamily: fonts.system, color: colors.text, fontSize: 34, fontWeight: '800', height: 44, width: '100%' },
-    body: { fontFamily: fonts.system, color: colors.textMuted, fontSize: 17, lineHeight: 24, height: 60, width: '100%', marginTop: spacing(1) },
+    num: {
+      fontFamily: fonts.mono,
+      fontSize: 16,
+      fontWeight: '800',
+      marginBottom: spacing(1),
+    },
+    title: {
+      fontFamily: fonts.system,
+      color: colors.text,
+      fontSize: 34,
+      fontWeight: '800',
+      height: 44,
+      width: '100%',
+    },
+    body: {
+      fontFamily: fonts.system,
+      color: colors.textMuted,
+      fontSize: 17,
+      lineHeight: 24,
+      height: 60,
+      width: '100%',
+      marginTop: spacing(1),
+    },
     actions: { flexDirection: 'row', gap: spacing(1.5), marginTop: spacing(2) },
     ghost: {
       flex: 1,

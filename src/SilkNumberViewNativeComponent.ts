@@ -36,7 +36,9 @@ export interface NativeProps extends ViewProps {
   textAlign?: CodegenTypes.WithDefault<string, 'auto'>;
 
   /** Fires when the counter reaches `value`. */
-  onCounterEnd?: CodegenTypes.BubblingEventHandler<Readonly<{ value: CodegenTypes.Double }>>;
+  onCounterEnd?: CodegenTypes.BubblingEventHandler<
+    Readonly<{ value: CodegenTypes.Double }>
+  >;
 }
 
 export default codegenNativeComponent<NativeProps>('SilkNumberView');

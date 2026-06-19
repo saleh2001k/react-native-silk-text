@@ -29,7 +29,9 @@ export function HeadlinesScreen() {
       <Card glow={colors.pink} style={{ minHeight: 280 }}>
         <View style={styles.meta}>
           <View style={[styles.tag, { backgroundColor: colors.accentSoft }]}>
-            <Text style={[styles.tagText, { color: colors.pink }]}>{item.tag}</Text>
+            <Text style={[styles.tagText, { color: colors.pink }]}>
+              {item.tag}
+            </Text>
           </View>
           <View style={styles.live}>
             <View style={[styles.dot, { backgroundColor: colors.pink }]} />
@@ -54,12 +56,26 @@ export function HeadlinesScreen() {
 
 function createStyles(colors: ThemeColors) {
   return StyleSheet.create({
-    meta: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing(2) },
-    tag: { borderRadius: radius.pill, paddingHorizontal: spacing(1.5), paddingVertical: spacing(0.75) },
+    meta: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: spacing(2),
+    },
+    tag: {
+      borderRadius: radius.pill,
+      paddingHorizontal: spacing(1.5),
+      paddingVertical: spacing(0.75),
+    },
     tagText: { fontSize: 12, fontWeight: '800' },
     live: { flexDirection: 'row', alignItems: 'center', gap: 6 },
     dot: { width: 8, height: 8, borderRadius: 4 },
-    liveText: { color: colors.textMuted, fontSize: 11, fontWeight: '800', letterSpacing: 1 },
+    liveText: {
+      color: colors.textMuted,
+      fontSize: 11,
+      fontWeight: '800',
+      letterSpacing: 1,
+    },
     headline: {
       fontFamily: fonts.system,
       color: colors.text,
@@ -69,6 +85,11 @@ function createStyles(colors: ThemeColors) {
       height: 170,
       width: '100%',
     },
-    note: { color: colors.textFaint, fontSize: 12, marginTop: spacing(2), textAlign: 'center' },
+    note: {
+      color: colors.textFaint,
+      fontSize: 12,
+      marginTop: spacing(2),
+      textAlign: 'center',
+    },
   });
 }
