@@ -2,6 +2,7 @@
   "expo": {
     "name": "SilkText Example",
     "slug": "react-native-silk-text-example",
+    "scheme": "silktext-example",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,7 +26,15 @@
       "package": "silktext.example"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }

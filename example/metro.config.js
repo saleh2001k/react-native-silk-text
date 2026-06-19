@@ -17,7 +17,7 @@ const pak = require('../package.json');
  */
 const config = getDefaultConfig(__dirname);
 
-config.watchFolders = [root];
+config.watchFolders = [...new Set([...(config.watchFolders ?? []), root])];
 
 config.resolver.nodeModulesPaths = [
   path.resolve(__dirname, 'node_modules'),
