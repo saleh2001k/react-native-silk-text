@@ -93,7 +93,42 @@ the native renderer.
 | `animation.enabled` | `boolean` | `true` | `false` snaps without animating. |
 | `onAnimationComplete` | `(text: string) => void` | — | Fires when the stagger settles. |
 
-### Not supported
+## AnimatedNumber (counter)
+
+A native animated counter. The value rolls from `from` to `value` over
+`duration`, formatted with optional grouping + fixed decimals. iOS 17+ digit
+changes use `contentTransition(.numericText())`.
+
+```tsx
+import { AnimatedNumber } from 'react-native-silk-text';
+
+<AnimatedNumber
+  style={{ fontSize: 46, fontWeight: '800', color: '#42E2B8', height: 58 }}
+  value={7500}
+  from={0}
+  separator=","
+  duration={1800}
+  onCounterEnd={(v) => console.log('reached', v)}
+/>
+```
+
+Changing `value` re-rolls from the current value.
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `value` | `number` | — | Target value. |
+| `from` | `number` | `0` | Start value for the first run. |
+| `duration` | `number` (ms) | `2000` | Roll duration. |
+| `delay` | `number` (ms) | `0` | Delay before rolling. |
+| `decimals` | `number` | `0` | Fraction digits. |
+| `separator` | `string` | `''` | Thousands grouping char. |
+| `prefix` / `suffix` | `string` | `''` | Wrap the number (e.g. `$`, `%`). |
+| `animateOnMount` | `boolean` | `true` | Roll on first mount. |
+| `variant` | `'roll' \| 'odometer'` | `'roll'` | `roll` counts up smoothly; `odometer` slides each digit up/down on change (iOS 17 `numericText`). |
+| `style` | `TextStyle` | — | color / fontFamily / fontSize / fontWeight / fontStyle / textAlign. |
+| `onCounterEnd` | `(value: number) => void` | — | Fires when the roll settles. |
+
+## AnimatedText — not supported
 
 Because the renderer is a single native declarative text view, these RN `<Text>`
 features are intentionally **not** supported: nested `<Text>` children, `selectable`,

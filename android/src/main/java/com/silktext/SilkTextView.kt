@@ -1,9 +1,6 @@
 package com.silktext
 
 import android.content.Context
-import android.widget.FrameLayout
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.bridge.WritableMap
@@ -11,26 +8,16 @@ import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.Event
 
 /**
- * Fabric host view: a [FrameLayout] wrapping a [ComposeView] that renders the
- * native [SilkText] engine. Props flow in via [SilkTextViewModel]; the
- * animation-complete callback is dispatched back to JS as a bubbling event.
+ * Fabric host view wrapping the native [SilkText] Compose engine. Props flow in
+ * via [SilkTextViewModel]; the animation-complete callback is dispatched back
+ * to JS as a bubbling event.
  */
-class SilkTextView(context: Context) : FrameLayout(context) {
+class SilkTextView(context: Context) : SilkComposeHost(context) {
 
   val model = SilkTextViewModel()
 
   init {
-    val composeView = ComposeView(context).apply {
-      setViewCompositionStrategy(
-        ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
-      )
-      setContent { SilkText(model) }
-    }
-    addView(
-      composeView,
-      LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-    )
-
+    setComposeContent { SilkText(model) }
     model.onComplete = { text -> dispatchComplete(text) }
   }
 

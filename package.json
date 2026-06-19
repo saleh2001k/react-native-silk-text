@@ -124,6 +124,9 @@
       "components": {
         "SilkTextView": {
           "className": "SilkTextView"
+        },
+        "SilkNumberView": {
+          "className": "SilkNumberView"
         }
       }
     }
