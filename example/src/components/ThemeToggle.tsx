@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet } from 'react-native';
 import { useAppTheme } from '../hooks/use-app-theme';
-import { radius, spacing } from '../theme';
+import { radius } from '../theme';
 
 export function ThemeToggle() {
   const { colors, isDark, toggleMode } = useAppTheme();

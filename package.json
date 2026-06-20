@@ -50,14 +50,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/salehayman/react-native-silk-text.git"
+    "url": "git+https://github.com/saleh2001k/react-native-silk-text.git"
   },
-  "author": "Saleh Ayman <saleh.ayman2001@gmail.com> (https://github.com/salehayman)",
+  "author": "Saleh Ayman <saleh.ayman2001@gmail.com> (https://github.com/saleh2001k)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/salehayman/react-native-silk-text/issues"
+    "url": "https://github.com/saleh2001k/react-native-silk-text/issues"
   },
-  "homepage": "https://github.com/salehayman/react-native-silk-text#readme",
+  "homepage": "https://github.com/saleh2001k/react-native-silk-text#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
